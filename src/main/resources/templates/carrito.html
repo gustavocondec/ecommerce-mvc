@@ -4,35 +4,39 @@
     <title>Carrito</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="container mt-4">
-    <h1 class="mb-4">Carrito de Compras 🛒</h1>
+<body class="bg-light">
+    <div th:replace="fragments/navbar :: navbar"></div>
 
-    <table class="table table-bordered table-hover">
-        <thead class="table-dark">
-            <tr>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="item : ${items}">
-                <td th:text="${item.producto.nombre}"></td>
-                <td th:text="${item.cantidad}"></td>
-                <td>$<span th:text="${item.producto.precio}"></span></td>
-                <td>$<span th:text="${item.total}"></span></td>
-            </tr>
-        </tbody>
-    </table>
+    <main class="container py-4">
+        <h1 class="mb-4">Carrito de Compras 🛒</h1>
 
-    <h3 class="text-end">Total: $<span th:text="${total}"></span></h3>
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${items}">
+                    <td th:text="${item.producto.nombre}"></td>
+                    <td th:text="${item.cantidad}"></td>
+                    <td>$<span th:text="${item.producto.precio}"></span></td>
+                    <td>$<span th:text="${item.total}"></span></td>
+                </tr>
+            </tbody>
+        </table>
 
-    <div class="d-flex gap-2 mt-4">
-        <form th:action="@{/carrito/limpiar}" method="post">
-            <button type="submit" class="btn btn-danger">Vaciar Carrito</button>
-        </form>
-        <a href="/" class="btn btn-secondary">Seguir Comprando</a>
-    </div>
+        <h3 class="text-end">Total: $<span th:text="${total}"></span></h3>
+
+        <div class="d-flex gap-2 mt-4">
+            <form th:action="@{/carrito/limpiar}" method="post">
+                <button type="submit" class="btn btn-danger">Vaciar Carrito</button>
+            </form>
+            <a href="/" class="btn btn-secondary">Seguir Comprando</a>
+        </div>
+    </main>
 </body>
 </html>
