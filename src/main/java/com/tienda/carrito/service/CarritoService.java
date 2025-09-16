@@ -44,4 +44,8 @@ public class CarritoService {
     public void limpiarCarrito() {
         carrito.clear();
     }
+
+    public void eliminarProducto(Long idProducto) {
+        carrito.remove(idProducto);
+    }
 }

@@ -38,4 +38,11 @@ public class CarritoController {
         carritoService.limpiarCarrito();
         return "redirect:/carrito";
     }
+
+    @PostMapping("/carrito/eliminar")
+    public String eliminarProducto(@RequestParam("idProducto") Long idProducto) {
+        carritoService.eliminarProducto(idProducto);
+        return "redirect:/carrito";
+    }
+
 }
