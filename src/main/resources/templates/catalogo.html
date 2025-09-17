@@ -11,26 +11,28 @@
         }
     </style>
 </head>
-<body class="container mt-4">
-    <h1 class="mb-4">Catálogo de Productos</h1>
+<body class="bg-light">
+    <div th:replace="fragments/navbar :: navbar"></div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 mb-3" th:each="producto : ${productos}">
-                <div class="card shadow-sm h-100">
-                    <img th:src="@{'/img/' + ${producto.id} + '.png'}" class="card-img-top" alt="Imagen producto">
-                    <div class="card-body d-flex flex-column">
+    <main class="container py-4">
+        <h1 class="mb-4">Catálogo de Productos</h1>
+
+        <div class="row" th:each="producto : ${productos}">
+            <div class="col-md-4 mb-3">
+                <div class="card shadow-sm">
+                    <img th:src="@{'/img/' + ${producto.id} + '.jpg'}" class="card-img-top" alt="Imagen producto">
+                    <div class="card-body">
                         <h5 class="card-title" th:text="${producto.nombre}"></h5>
                         <p class="card-text">Precio: $<span th:text="${producto.precio}"></span></p>
-                        <form th:action="@{/agregar/{id}(id=${producto.id})}" method="post" class="mt-auto">
+                        <form th:action="@{/agregar/{id}(id=${producto.id})}" method="post">
                             <button type="submit" class="btn btn-primary w-100">Agregar al carrito</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <a href="/carrito" class="btn btn-success mt-4">Ver Carrito 🛒</a>
+        <a href="/carrito" class="btn btn-success mt-4">Ver Carrito 🛒</a>
+    </main>
 </body>
 </html>
