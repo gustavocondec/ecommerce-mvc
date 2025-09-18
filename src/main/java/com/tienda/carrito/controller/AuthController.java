@@ -36,18 +36,13 @@ public class AuthController {
         }
 
         session.setAttribute("userEmail", username.trim());
-        //return "redirect:/catalogo"; // credenciales válidas (sencillo), redirige al catálogo
         model.addAttribute("productos", carritoService.listarProductos());
         return "catalogo";
     }
 
     @PostMapping("/logout")
     public String cerrarSesion(HttpSession session) {
-
         session.removeAttribute("userEmail");
-        session.removeAttribute("productos");
-        session.removeAttribute("items");
-        session.removeAttribute("total");
         carritoService.limpiarCarrito();
         return "redirect:/login?logout";
     }
