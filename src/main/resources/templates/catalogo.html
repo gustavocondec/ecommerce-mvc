@@ -11,9 +11,11 @@
         }
     </style>
 </head>
-<body class="container mt-4">
-    <h1 class="mb-4">Catálogo de Productos</h1>
+<body class="bg-light">
+    
+    <div th:replace="fragments/navbar :: navbar"></div>
     <div class="container">
+        <h1 class="m-4">Catálogo de Productos</h1>
         <div class="row">
             <div class="col-md-4 mb-3" th:each="producto : ${productos}">
                 <div class="card shadow-sm h-100">
@@ -28,7 +30,7 @@
                 </div>
             </div>
         </div>
+        <a href="/carrito" class="btn btn-success mt-1">Ver Carrito 🛒</a>
     </div>
-    <a href="/carrito" class="btn btn-success mt-4">Ver Carrito 🛒</a>
 </body>
 </html>
