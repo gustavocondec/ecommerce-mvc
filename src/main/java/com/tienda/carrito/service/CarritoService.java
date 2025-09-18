@@ -1,70 +1,26 @@
 package com.tienda.carrito.service;
 
+import java.util.List;
+
 import com.tienda.carrito.model.ItemCarrito;
 import com.tienda.carrito.model.Producto;
-import org.springframework.stereotype.Service;
-import java.util.*;
 
-@Service
-public class CarritoService {
-    private final Map<Long, ItemCarrito> carrito = new HashMap<>();
-    private final List<Producto> catalogo = Arrays.asList(
-            new Producto(1L, "Laptop", 2500.0),
-            new Producto(2L, "Mouse", 50.0),
-            new Producto(3L, "Teclado", 120.0),
-            new Producto(4L, "Monitor", 800.0)
-    );
+public interface CarritoService {
 
-    public List<Producto> listarProductos() {
-        return catalogo;
-    }
+    public List<Producto> listarProductos();
 
-    public void agregarProducto(Long id) {
-        Producto producto = catalogo.stream()
-                .filter(p -> p.getId().equals(id))
-                .findFirst()
-                .orElse(null);
-        if (producto != null) {
-            carrito.compute(id, (k, v) -> {
-                if (v == null) return new ItemCarrito(producto, 1);
-                v.incrementarCantidad();
-                return v;
-            });
-        }
-    }
+    public void agregarProducto(Long id);
 
-    public List<ItemCarrito> verCarrito() {
-        return new ArrayList<>(carrito.values());
-    }
+    public List<ItemCarrito> verCarrito();
 
-    public double calcularTotal() {
-        return carrito.values().stream().mapToDouble(ItemCarrito::getTotal).sum();
-    }
+    public double calcularTotal();
 
-    public void limpiarCarrito() {
-        carrito.clear();
-    }
+    public void limpiarCarrito();
 
-    public void eliminarProducto(Long idProducto) {
-        carrito.remove(idProducto);
-    }
+    public void eliminarProducto(Long idProducto);
 
-    public void incrementarCantidad(Long idProducto) {
-        ItemCarrito item = carrito.get(idProducto);
-        if (item != null) {
-            item.incrementarCantidad();
-        }
-    }
+    public void incrementarCantidad(Long idProducto);
 
-    public void decrementarCantidad(Long idProducto) {
-        ItemCarrito item = carrito.get(idProducto);
-        if (item != null) {
-            item.decrementarCantidad();
-            if (item.getCantidad() <= 0) {
-                carrito.remove(idProducto); // Elimina si la cantidad llega a 0
-            }
-        }
-    }
-
-
+    public void decrementarCantidad(Long idProducto);
+    
 }

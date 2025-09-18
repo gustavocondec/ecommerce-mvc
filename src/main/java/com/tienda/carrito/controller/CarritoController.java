@@ -1,9 +1,6 @@
 package com.tienda.carrito.controller;
 
 import com.tienda.carrito.service.CarritoService;
-
-import jakarta.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +14,7 @@ public class CarritoController {
 
     @GetMapping("/")
     public String verCatalogo(Model model) {
+        carritoService.limpiarCarrito();
         return "login";
     }
 
