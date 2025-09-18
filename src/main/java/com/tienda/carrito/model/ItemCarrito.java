@@ -14,4 +14,11 @@ public class ItemCarrito {
     public double getTotal() { return producto.getPrecio() * cantidad; }
 
     public void incrementarCantidad() { this.cantidad++; }
+
+    public void decrementarCantidad() {
+        if (this.cantidad > 0) {
+            this.cantidad--;
+        }
+    }
+
 }

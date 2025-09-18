@@ -7,8 +7,53 @@
 <body class="bg-light">
     <div th:replace="fragments/navbar :: navbar"></div>
 
-    <main class="container py-4">
-        <h1 class="mb-4">Carrito de Compras 🛒</h1>
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Total</th>
+                <th>Acciones</th> <!-- Nueva columna -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="item : ${items}">
+                <td th:text="${item.producto.nombre}"></td>
+                <td th:text="${item.cantidad}"></td>
+                <td>$<span th:text="${item.producto.precio}"></span></td>
+                <td>$<span th:text="${item.total}"></span></td>
+
+                <!--<td>
+                    <form th:action="@{/carrito/eliminar}" method="post">
+                        <input type="hidden" th:name="idProducto" th:value="${item.producto.id}" />
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
+                    </form>
+                </td>-->
+
+                <td>
+                    <!-- Botón para incrementar cantidad -->
+                    <form th:action="@{/carrito/incrementar}" method="post" class="d-inline">
+                        <input type="hidden" th:name="idProducto" th:value="${item.producto.id}" />
+                        <button type="submit" class="btn btn-sm btn-success">+</button>
+                    </form>
+
+                    <!-- Botón para decrementar cantidad -->
+                    <form th:action="@{/carrito/decrementar}" method="post" class="d-inline">
+                        <input type="hidden" th:name="idProducto" th:value="${item.producto.id}" />
+                        <button type="submit" class="btn btn-sm btn-warning">−</button>
+                    </form>
+
+                    <!-- Botón para eliminar producto -->
+                    <form th:action="@{/carrito/eliminar}" method="post" class="d-inline">
+                        <input type="hidden" th:name="idProducto" th:value="${item.producto.id}" />
+                        <button type="submit" class="btn btn-sm btn-outline-danger">🗑</button>
+                    </form>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
 
         <table class="table table-bordered table-hover">
             <thead class="table-dark">

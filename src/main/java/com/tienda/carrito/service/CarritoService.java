@@ -44,4 +44,27 @@ public class CarritoService {
     public void limpiarCarrito() {
         carrito.clear();
     }
+
+    public void eliminarProducto(Long idProducto) {
+        carrito.remove(idProducto);
+    }
+
+    public void incrementarCantidad(Long idProducto) {
+        ItemCarrito item = carrito.get(idProducto);
+        if (item != null) {
+            item.incrementarCantidad();
+        }
+    }
+
+    public void decrementarCantidad(Long idProducto) {
+        ItemCarrito item = carrito.get(idProducto);
+        if (item != null) {
+            item.decrementarCantidad();
+            if (item.getCantidad() <= 0) {
+                carrito.remove(idProducto); // Elimina si la cantidad llega a 0
+            }
+        }
+    }
+
+
 }
