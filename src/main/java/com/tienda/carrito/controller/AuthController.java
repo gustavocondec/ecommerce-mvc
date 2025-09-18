@@ -23,6 +23,7 @@ public class AuthController {
         if (session.getAttribute("userEmail") != null) {
             return "redirect:/"; // Usuario logueado vuelve al catálogo
         }
+        carritoService.limpiarCarrito();
         return "login"; // Renderiza templates/login.html
     }
 
